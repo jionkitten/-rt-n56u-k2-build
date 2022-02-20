@@ -29,6 +29,8 @@ jobs:
           cd /opt/rt-n56u/toolchain-mipsel
           sh dl_toolchain.sh
           mkdir -p ${images_dir}
+      - name: Patch dropbear build
+        run: sed -i '30i		--disable-harden \' /opt/rt-n56u/trunk/user/dropbear/Makefile
       - name: Override config
         run: cp config /opt/rt-n56u/trunk/configs/templates/PSG1218.config
       - name: Build firmware
